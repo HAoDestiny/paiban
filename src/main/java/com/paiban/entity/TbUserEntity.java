@@ -2,6 +2,10 @@ package com.paiban.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -10,10 +14,11 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name = "tb_user", schema = "ssh", catalog = "")
+@JsonInclude(Include.NON_EMPTY)     //过滤NULL或者""
+@JsonIgnoreProperties (value = { "password", "created", "updated"})//json过滤敏感字段输出
 public class TbUserEntity {
     private long id;
     private String userName;
-    //@JSONField(serialize = false)//json过滤敏感字段输出
     private String password;
     private String phone;
     private String email;

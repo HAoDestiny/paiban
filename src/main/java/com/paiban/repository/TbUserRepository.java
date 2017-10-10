@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository                                            //实体类名
-public interface TbUserRepository extends JpaRepository<TbUserEntity, Integer>{
-    TbUserEntity findById(Integer id);
+public interface TbUserRepository extends JpaRepository<TbUserEntity, Long>{
+    TbUserEntity findById(Long id) throws Exception;
 }
