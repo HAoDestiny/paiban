@@ -2,10 +2,12 @@ package com.paiban.controller;
 
 import com.paiban.Util.exception.MyException;
 import com.paiban.Util.exception.TestException;
+import com.paiban.annotations.Authority;
 import com.paiban.entity.TbUserEntity;
 import com.paiban.repository.TbUserRepository;
 import com.paiban.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -66,5 +68,12 @@ public class UserTokenController {
     @ResponseBody
     public void testException() throws MyException {
        throw new MyException("", "TEST_EXCEPTION_QUERY_FAILED");
+    }
+
+    @RequestMapping(value = "/testRole", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, method = RequestMethod.GET)
+    @ResponseBody
+    @Authority(authorities = {"admin"})
+    public String testRole() {
+        return "Hello, admin";
     }
 }
